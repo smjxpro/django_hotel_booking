@@ -1,0 +1,45 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'partials/breadcrumb.html' with title='Rooms' %}
+
+
+    <section class="ftco-section bg-light ftco-no-pt ftco-no-pb">
+        <div class="container-fluid px-md-0">
+            <div class="row no-gutters">
+                {% for room_type in room_types %}
+                    <div class="col-lg-6">
+                        <div class="room-wrap d-md-flex">
+                            <a href="#" class="img"
+                               style="background-image: url({% static 'base/' %}images/room-1.jpg);"></a>
+                            <div class="half left-arrow d-flex align-items-center">
+                                <div class="text p-4 p-xl-5 text-center">
+                                    <p class="star mb-0"><span class="fa fa-star"></span><span
+                                            class="fa fa-star"></span><span class="fa fa-star"></span><span
+                                            class="fa fa-star"></span><span class="fa fa-star"></span></p>
+                                    <p class="mb-0"><span class="price mr-1">${{ room_type.price }}</span> <span
+                                            class="per">per night</span></p>
+                                    <h3 class="mb-3"><a href="rooms.html">{{ room_type.room_type.capitalize }}</a></h3>
+                                    <ul class="list-accomodation">
+                                        <li><span>Max:</span> {{ room_type.maximum_capacity }} Persons</li>
+                                        <li><span>Size:</span> {{ room_type.size }} m2</li>
+                                        <li><span>View:</span> {{ room_type.view }}</li>
+                                        <li><span>Bed:</span> {{ room_type.bed_number }}</li>
+                                    </ul>
+                                    <p class="pt-1"><a
+                                            href="{% url 'rooms:check_available_rooms_by_type' room_type.pk %}"
+                                            class="btn-custom px-3 py-2">View
+                                        Available {{ room_type.room_type.capitalize }} Rooms
+                                        <span class="icon-long-arrow-right"></span></a></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}

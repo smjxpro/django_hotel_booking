@@ -1,0 +1,65 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'partials/breadcrumb.html' with title='Login' %}
+
+
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row no-gutters">
+            </div>
+            <div class="col-md-12">
+                <div class="wrapper">
+                    <div class="row no-gutters">
+                        <div class="col-lg-8 col-md-7 d-flex align-items-stretch">
+                            <div class="contact-wrap w-100 p-md-5 p-4">
+                                <h3 class="mb-4">Login</h3>
+                                <div id="form-message-warning" class="mb-4"></div>
+                                <div id="form-message-success" class="mb-4">
+                                    Login successful, you will be redirected shortly!
+                                </div>
+                                <form method="POST" id="contactForm" name="contactForm" class="contactForm"
+                                      action="{% url 'customer:login' %}?next={{ next_page }}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{ request.path }}">
+
+                                    <div class="row">
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" for="username">Username</label>
+                                                <input type="text" class="form-control" name="username" id="username"
+                                                       placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="label" for="password">Password</label>
+                                                <input type="password" class="form-control" name="password"
+                                                       id="password" placeholder="password">
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <input type="submit" value="Login" class="btn btn-primary">
+                                                <div class="submitting">
+                                                    Don't have an account? Register <a
+                                                        href="{% url 'customer:register' %}">here</a>!
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </section>
+
+{% endblock content %}

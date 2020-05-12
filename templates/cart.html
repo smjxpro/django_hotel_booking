@@ -1,0 +1,149 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'partials/breadcrumb.html' with title='Cart' %}
+
+
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row no-gutters">
+
+                <div class="col-md-12">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+                            <div class="col-lg-8 col-md-7 d-flex align-items-stretch">
+                                <div class="contact-wrap w-100 p-md-5 p-4">
+                                    <h3 class="mb-4">Shopping cart</h3>
+                                    <div id="form-message-warning" class="mb-4"></div>
+                                    <div id="form-message-success" class="mb-4">
+                                        <!-- Your message was sent, thank you! -->
+                                    </div>
+                                    <div class="container mb-4">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div class="table-responsive">
+                                                    <table class="table table-striped">
+                                                        <thead>
+                                                        <tr>
+                                                            <th scope="col"></th>
+                                                            <th scope="col">Room</th>
+                                                            <th scope="col">Type</th>
+                                                            <th scope="col">Capacity</th>
+                                                            <th scope="col">Price/Day</th>
+                                                            <th scope="col"></th>
+                                                            <th scope="col" class="text-center">Days</th>
+                                                            <th scope="col" class="text-right">Price</th>
+                                                            <th></th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td><img src="https://dummyimage.com/50x50/55595c/fff"/>
+                                                            </td>
+                                                            <td>{{ booking.room }}</td>
+                                                            <td>{{ booking.room.room_type }}</td>
+                                                            <td>{{ booking.room.room_type.maximum_capacity }}</td>
+                                                            <td>{{ booking.room.room_type.price }}</td>
+                                                            <td>x</td>
+                                                            <td>{{ booking.total_days }}</td>
+
+                                                            <td class="text-right">${{ booking.booking_price }}</td>
+                                                            <td class="text-right">
+{#                                                                <button class="btn btn-sm btn-danger"><i#}
+{#                                                                        class="fa fa-trash"></i></button>#}
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td>Sub-Total</td>
+                                                            <td class="text-right">${{ booking.booking_price }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td></td>
+                                                            <td><strong>Total</strong></td>
+                                                            <td class="text-right">
+                                                                <strong>${{ booking.booking_price }}</strong></td>
+                                                        </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                            <div class="col mb-2">
+                                                <div class="row">
+                                                    <div class="col-sm-12  col-md-6">
+                                                        <button class="btn btn-block btn-light">Continue Booking
+                                                        </button>
+                                                    </div>
+                                                    <div class="col-sm-12 col-md-6 text-right">
+                                                        <form action="{% url 'customer:dashboard' %}" method="post">
+                                                            {% csrf_token %}
+                                                        <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase">
+                                                            Checkout
+                                                        </button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-5 d-flex align-items-stretch">
+                                <div class="info-wrap bg-dark w-100 p-md-5 p-4">
+                                    <h3>Let's get in touch</h3>
+                                    <p class="mb-4">We're open for any suggestion or just to have a chat</p>
+                                    <div class="dbox w-100 d-flex align-items-start">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-map-marker"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Address:</span> 198 West 21th Street, Suite 721 New York NY 10016
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-phone"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Phone:</span> <a href="tel://1234567920">+ 1235 2355 98</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-paper-plane"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Email:</span> <a
+                                                    href="mailto:info@yoursite.com">info@yoursite.com</a></p>
+                                        </div>
+                                    </div>
+                                    <div class="dbox w-100 d-flex align-items-center">
+                                        <div class="icon d-flex align-items-center justify-content-center">
+                                            <span class="fa fa-globe"></span>
+                                        </div>
+                                        <div class="text pl-3">
+                                            <p><span>Website</span> <a href="#">yoursite.com</a></p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock content %}

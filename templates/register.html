@@ -1,0 +1,146 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% include 'partials/breadcrumb.html' with title='Register' %}
+
+
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row no-gutters">
+
+
+                <div class="col-md-12">
+                    <div class="wrapper">
+                        <div class="row no-gutters">
+                            <div class="col-lg-8 col-md-7 d-flex align-items-stretch">
+                                <div class="contact-wrap w-100 p-md-5 p-4">
+                                    <h3 class="mb-4">Register</h3>
+
+                                    <div id="form-message-warning" class="mb-4">
+                                        <ul>
+                                            {% for field in user_form %}
+                                                {% if field.errors %}
+                                                    <li>
+                                                        {{ field.label }}
+                                                        <ul class="errorlist">
+                                                            {% for error in field.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+
+                                        <ul>
+                                            {% for field in customer_form %}
+                                                {% if field.errors %}
+                                                    <li>
+                                                        {{ field.label }}
+                                                        <ul class="errorlist">
+                                                            {% for error in field.errors %}
+                                                                <li>{{ error }}</li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </li>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </ul>
+                                    </div>
+                                    <div id="form-message-success" class="mb-4">
+                                    </div>
+                                    <form method="POST" id="contactForm" name="contactForm" class="contactForm"
+                                          action="{% url 'customer:register' %}">
+                                        {% csrf_token %}
+                                        <div class="row">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="first_name">First Name</label>
+                                                    <input type="text" class="form-control" name="first_name"
+                                                           id="first_name" placeholder="First Name">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label class="label" for="last_name">Last Name</label>
+                                                    <input type="text" class="form-control" name="last_name"
+                                                           id="last_name" placeholder="Last Name">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="nid_no">NID Number</label>
+                                                    <input type="text" class="form-control" name="nid_no"
+                                                           id="nid_no" placeholder="NID Number">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="passport_no">Passport Number</label>
+                                                    <input type="text" class="form-control" name="passport_no"
+                                                           id="passport_no" placeholder="Passport Number">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="photo">Photo</label>
+                                                    <input type="file" class="form-control" name="photo"
+                                                           id="photo" placeholder="Photo">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="phone_no">Phone Number</label>
+                                                    <input type="text" class="form-control" name="phone_no"
+                                                           id="phone_no"
+                                                           placeholder="Phone No">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="email">Email Address</label>
+                                                    <input type="email" class="form-control" name="email" id="email"
+                                                           placeholder="Email">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="username">Username</label>
+                                                    <input type="text" class="form-control" name="username"
+                                                           id="username" placeholder="Username">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label class="label" for="password">Password</label>
+                                                    <input type="password" class="form-control" name="password"
+                                                           id="password" placeholder="Password">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <input type="submit" value="Register" class="btn btn-primary">
+                                                    <div class="submitting">
+                                                        Already have an account? Login <a href="#">here</a>!
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock content %}
