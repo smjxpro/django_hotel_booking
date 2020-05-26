@@ -1,0 +1,144 @@
+<html>
+
+{% load static %}
+<head>
+    <title>Checkout</title>
+    <style type="text/css" href="{% static 'payment/css/stripe.css' %}"></style>
+
+
+    <script src="https://js.stripe.com/v3/"></script>
+
+    <style>
+        body {
+            margin: 50px auto;
+            width: 600px;
+        }
+
+        /* CSS for Credit Card Payment form */
+        .credit-card-box .panel-title {
+            display: inline;
+            font-weight: bold;
+        }
+
+        .credit-card-box .form-control.error {
+            border-color: red;
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6);
+        }
+
+        .credit-card-box label.error {
+            font-weight: bold;
+            color: red;
+            padding: 2px 8px;
+            margin-top: 2px;
+        }
+
+        .credit-card-box .payment-errors {
+            font-weight: bold;
+            color: red;
+            padding: 2px 8px;
+            margin-top: 2px;
+        }
+
+        .credit-card-box label {
+            display: block;
+        }
+
+        /* The old "center div vertically" hack */
+        .credit-card-box .display-table {
+            display: table;
+        }
+
+        .credit-card-box .display-tr {
+            display: table-row;
+        }
+
+        .credit-card-box .display-td {
+            display: table-cell;
+            vertical-align: middle;
+            width: 50%;
+        }
+
+        /* Just looks nicer */
+        .credit-card-box .panel-heading img {
+            min-width: 180px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+<div id="container">
+    <div class="column-6">
+        <div id="left-wrapper">
+            <h1>Payment</h1>
+        </div>
+        <div style="clear:left"></div>
+        <hr>
+        <div class="column-6">
+            <h3>Amount: {{ amount }} USD</h3>
+        </div>
+        <!-- Add form here -->
+        <form action="{% url 'payment:charge' %}" method="post" id="payment-form">
+            {% csrf_token %}
+            {#            <div class="form-field-12">#}
+            {#                <label for="amount">Choose Amount:</label>#}
+            {#                <br>#}
+            {#                <br>#}
+            {#                <select required name="amount" id="amount">#}
+            {#                    <option selected value="5">$5 --- Here's a coffee, on me :)</option>#}
+            {#                    <option value="10">$10 --- You helped me, so I am going to help you</option>#}
+            {#                    <option value="25">$25 --- I love your channel!</option>#}
+            {#                </select>#}
+            {#            </div>#}
+
+          <div class="form-field-6">
+                <input required type="text" name="booking-pk" value="{{ booking_pk }}" hidden>
+            </div>
+
+            <div class="form-field-6">
+                <input required type="text" name="amount" value="{{ amount }}" hidden>
+            </div>
+
+            <div class="form-field-6">
+                <input required type="text" name="email" placeholder="Email"
+                       {% if user.is_authenticated %}value="{{ user.email }}" {% endif %}>
+            </div>
+
+            <div class="form-field-6">
+                <input required type="text" name="name" placeholder="Name"
+                       {% if user.is_authenticated %}value="{{ user.customer }}" {% endif %}>
+            </div>
+
+            <div class="form-row">
+                <label for="card-element">
+                    Credit or debit card
+                </label>
+                <div id="card-element">
+                    <!-- A Stripe Element will be inserted here. -->
+                </div>
+
+                <!-- Used to display form errors. -->
+                <div id="card-errors" role="alert"></div>
+            </div>
+
+            <div style="clear:left"></div>
+            <hr>
+
+            <input class="btn-primary" style="background-color:#10a195" type="submit" value="Pay"
+                   name="">
+
+        </form>
+
+
+    </div>
+</div>
+</div>
+
+
+<script src="{% static 'payment/js/stripe.js' %}"></script>
+
+</body>
+</html>

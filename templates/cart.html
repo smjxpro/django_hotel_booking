@@ -51,8 +51,8 @@
 
                                                             <td class="text-right">${{ booking.booking_price }}</td>
                                                             <td class="text-right">
-{#                                                                <button class="btn btn-sm btn-danger"><i#}
-{#                                                                        class="fa fa-trash"></i></button>#}
+                                                                {#                                                                <button class="btn btn-sm btn-danger"><i#}
+                                                                {#                                                                        class="fa fa-trash"></i></button>#}
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -83,15 +83,22 @@
                                             <div class="col mb-2">
                                                 <div class="row">
                                                     <div class="col-sm-12  col-md-6">
-                                                        <button class="btn btn-block btn-light">Continue Booking
-                                                        </button>
+                                                        <a href="{% url 'rooms' %}">
+                                                            <button class="btn btn-block btn-light">Continue Booking
+                                                            </button>
+                                                        </a>
                                                     </div>
                                                     <div class="col-sm-12 col-md-6 text-right">
-                                                        <form action="{% url 'customer:dashboard' %}" method="post">
+                                                        <form action="{% url 'payment:checkout' %}"
+                                                              method="post">
                                                             {% csrf_token %}
-                                                        <button type="submit" class="btn btn-lg btn-block btn-success text-uppercase">
-                                                            Checkout
-                                                        </button>
+                                                            <input name="amount" value="{{ booking.booking_price }}"
+                                                                   hidden>
+                                                            <input name="booking-pk" value="{{ booking.pk }}" hidden>
+                                                            <button type="submit"
+                                                                    class="btn btn-lg btn-block btn-success text-uppercase">
+                                                                Checkout
+                                                            </button>
                                                         </form>
                                                     </div>
                                                 </div>

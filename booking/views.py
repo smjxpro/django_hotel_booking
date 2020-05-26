@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from booking.forms import BookingForm
+from booking.models import Booking
 from rooms.models import Room
 
 
@@ -27,9 +28,6 @@ def book_room(request, pk):
             booking.customer = request.user.customer
 
             booking.save()
-
-            room.available = False
-            room.save(force_update=True)
 
             return render(request, 'cart.html', {'booking': booking})
         else:
@@ -58,3 +56,14 @@ def check_available_rooms_by_number(request):
 
     else:
         return HttpResponse(f'Not found!')
+
+
+def delete_booking(request):
+    booking_pk = request.POST['booking-pk']
+
+    booking = get_object_or_404(Booking, pk=booking_pk)
+
+    if booking.customer.user == request.user:
+        booking.delete()
+
+    return redirect('customer:dashboard')

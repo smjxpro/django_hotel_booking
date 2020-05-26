@@ -38,9 +38,11 @@
                                 <th>Booking ID</th>
                                 <th>Room No</th>
                                 <th>Price</th>
+                                <th>Paid</th>
                                 <th>Check in date</th>
                                 <th>Check out date</th>
                                 <th>Days remaining</th>
+                                <th>Actions</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -49,9 +51,31 @@
                                     <td>{{ booking.pk }}</td>
                                     <td>{{ booking.room.room_no }}</td>
                                     <td>{{ booking.booking_price }}</td>
+                                    <td>{% if booking.paid %}
+                                        Yes
+                                    {% else %}
+                                        No
+                                    {% endif %} </td>
                                     <td>{{ booking.check_in_date }}</td>
                                     <td>{{ booking.check_out_date }}</td>
                                     <td>{{ booking.days_remaining }}</td>
+                                    <td>{% if booking.paid %}
+
+                                    {% else %}
+                                        <form action="{% url 'payment:checkout' %}" method="post">
+                                            {% csrf_token %}
+
+                                            <input name="amount" value="{{ booking.booking_price }}" hidden>
+                                            <input name="booking-pk" value="{{ booking.pk }}" hidden>
+                                            <input type="submit" class="btn btn-primary" value="Pay">
+                                        </form>
+                                        <form action="{% url 'booking:delete_booking' %}" method="post">
+                                            {% csrf_token %}
+                                            <input name="booking-pk" value="{{ booking.pk }}" hidden>
+
+                                            <input type="submit" class="btn btn-danger" value="Delete">
+                                        </form>
+                                    {% endif %} </td>
                                 </tr>
                             {% endfor %}
 

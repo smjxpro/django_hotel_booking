@@ -28,6 +28,7 @@ urlpatterns = [
 
                   path('customer/', include('customer.urls')),
                   path('booking/', include('booking.urls')),
+                  path('payment/', include('payment.urls')),
                   path('rooms/', include('rooms.urls')),
                   path('rooms/', room_type_list, name='rooms'),
                   path('about/', TemplateView.as_view(template_name='about.html'), name='about'),

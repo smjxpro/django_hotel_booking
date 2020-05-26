@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Refresh" content="5" ; url="{% url 'customer:dashboard' %}"/>
+
+    <title>Payment Successful</title>
+</head>
+<body>
+Payment successful for booking {{ booking }}.
+${{ amount }} has been charged!
+
+You will be redirected to the dashboard shortly. If doesn't automatically redirects, click <a
+        href="{% url 'customer:dashboard' %}">here</a>.
+</body>
+</html>

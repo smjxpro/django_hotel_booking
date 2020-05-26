@@ -19,10 +19,10 @@ class Booking(models.Model):
         return f'{self.customer.user.username}_{self.pk}'
 
     def booking_price(self):
-        return self.room.room_type.price * (self.check_out_date.day - self.check_in_date.day)
+        return self.room.room_type.price * (self.check_out_date - self.check_in_date).days
 
     def total_days(self):
-        return self.check_out_date.day - self.check_in_date.day
+        return (self.check_out_date - self.check_in_date).days
 
     def days_remaining(self):
         if self.check_out_date.day >= datetime.now().day:
