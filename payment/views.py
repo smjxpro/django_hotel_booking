@@ -51,13 +51,10 @@ def charge(request):
         booking.room.save(force_update=True)
         booking.save(force_update=True)
 
-        context = {
-            'booking': booking,
-            'amount': amount,
-        }
+        # context = {
+        #     'booking': booking,
+        #     'amount': amount,
+        # }
         # return render(request, 'payment/charge.html', context)
 
-    else:
-        return redirect(
-            reverse('customer:dashboard')
-        )
+    return redirect(reverse('customer:dashboard'))
