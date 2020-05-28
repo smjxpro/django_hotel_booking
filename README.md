@@ -1,4 +1,4 @@
-###Django Hotel Booking
+### Django Hotel Booking
 #
 
 1. Install virtualenv using pip: `pip install virtualenv`
