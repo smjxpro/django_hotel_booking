@@ -1,6 +1,5 @@
 import stripe
 from django.conf import settings
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 
@@ -40,7 +39,7 @@ def charge(request):
             customer=customer,
             amount=amount * 100,
             currency='usd',
-            description=booking,
+            description=f'Payment for booking: {booking}',
 
         )
 
