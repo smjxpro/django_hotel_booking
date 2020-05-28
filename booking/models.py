@@ -25,8 +25,8 @@ class Booking(models.Model):
         return (self.check_out_date - self.check_in_date).days
 
     def days_remaining(self):
-        if self.check_out_date.day >= datetime.now().day:
-            return self.check_out_date.day - datetime.now().day
+        if self.check_out_date >= datetime.now().date():
+            return (self.check_out_date - datetime.now().date()).days
         else:
             self.room.available = True
 
